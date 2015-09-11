@@ -7,8 +7,7 @@
     <bean class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer"/>
     <jaxrs:server id="services" address="/">
         <jaxrs:serviceBeans>
-            {{#apiInfo.apis}}
-            <bean class="{{ package }}.{{ classname }}"/>
+            {{#apiInfo.apis}}<bean class="{{ package }}.{{ classname }}"/>
             {{/apiInfo.apis}}
         </jaxrs:serviceBeans>
         <jaxrs:providers>
