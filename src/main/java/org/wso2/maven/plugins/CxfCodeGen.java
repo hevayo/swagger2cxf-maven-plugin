@@ -36,6 +36,10 @@ public class CxfCodeGen extends JaxRSServerCodegen {
     public void processOpts() {
         super.processOpts();
         sourceFolder ="gen"+ File.separator +"java";
+
+        modelTemplateFiles.clear();
+        modelTemplateFiles.put("dto.mustache", ".java");
+
         supportingFiles.clear();
         supportingFiles.add(new SupportingFile("ApiException.mustache",
                                                (sourceFolder + File.separator + apiPackage).replace(".", java.io.File.separator), "ApiException.java"));

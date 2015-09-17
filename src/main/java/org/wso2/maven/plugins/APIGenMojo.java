@@ -64,7 +64,7 @@ public class APIGenMojo extends AbstractMojo {
 
         config.additionalProperties().put("invokerPackage", project.getArtifact().getArtifactId());
         config.additionalProperties().put("apiPackage", project.getArtifact().getArtifactId());
-        config.additionalProperties().put("modelPackage", project.getArtifact().getArtifactId() + ".model");
+        config.additionalProperties().put("modelPackage", project.getArtifact().getArtifactId() + ".dto");
 
 
         config.setOutputDir(output.getAbsolutePath());
