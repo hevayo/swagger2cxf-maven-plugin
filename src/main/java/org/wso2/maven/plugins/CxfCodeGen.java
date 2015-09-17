@@ -21,15 +21,34 @@ import io.swagger.codegen.languages.JaxRSServerCodegen;
 import org.apache.commons.lang.WordUtils;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by jo on 7/29/15.
  */
 public class CxfCodeGen extends JaxRSServerCodegen {
 
+    Set reserveModelNames;
+
     public CxfCodeGen(){
         super();
         this.templateDir = "ApacheCXFJaxRS";
+
+        reserveModelNames = new HashSet<String>(
+                Arrays.asList(
+                        "String",
+                        "boolean",
+                        "Boolean",
+                        "Double",
+                        "Integer",
+                        "Long",
+                        "Float",
+                        "Object",
+                        "BigDecimal",
+                        "List")
+        );
     }
 
     @Override
@@ -78,4 +97,17 @@ public class CxfCodeGen extends JaxRSServerCodegen {
         return name;
     }
 
+    @Override
+    public String toModelName(String name) {
+        // model name cannot use reserved keyword, e.g. return
+        if (reservedWords.contains(name)) {
+            throw new RuntimeException(name + " (reserved word) cannot be used as a model name");
+        }
+        if(reserveModelNames.contains(name)){
+            return camelize(name);
+        }
+        // camelize the model name
+        // phone_number => PhoneNumber
+        return camelize(name)+"DTO";
+    }
 }
