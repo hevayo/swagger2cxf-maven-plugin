@@ -64,8 +64,6 @@ public class CxfCodeGen extends JaxRSServerCodegen {
                                                (sourceFolder + File.separator + apiPackage).replace(".", java.io.File.separator), "ApiException.java"));
         supportingFiles.add(new SupportingFile("ApiResponseMessage.mustache",
                                                (sourceFolder + File.separator + apiPackage).replace(".", java.io.File.separator), "ApiResponseMessage.java"));
-        supportingFiles.add(new SupportingFile("NotFoundException.mustache",
-                                               (sourceFolder + File.separator + apiPackage).replace(".", java.io.File.separator), "NotFoundException.java"));
         supportingFiles.add(new SupportingFile("beans.mustache", ("main/webapp/WEB-INF"), "beans.xml"));
 
     }

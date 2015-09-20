@@ -8,7 +8,6 @@ import {{modelPackage}}.*;
 {{/imports}}
 
 import java.util.List;
-import {{package}}.NotFoundException;
 
 import java.io.InputStream;
 
@@ -18,8 +17,7 @@ import javax.ws.rs.core.Response;
 public class {{classname}}ServiceImpl extends {{classname}}Service {
 {{#operation}}
     @Override
-    public Response {{nickname}}({{#allParams}}{{>serviceQueryParams}}{{>servicePathParams}}{{>serviceHeaderParams}}{{>serviceBodyParams}}{{>serviceFormParams}}{{#hasMore}},{{/hasMore}}{{/allParams}})
-    throws NotFoundException {
+    public Response {{nickname}}({{#allParams}}{{>serviceQueryParams}}{{>servicePathParams}}{{>serviceHeaderParams}}{{>serviceBodyParams}}{{>serviceFormParams}}{{#hasMore}},{{/hasMore}}{{/allParams}}){
         // do some magic!
         return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
     }
