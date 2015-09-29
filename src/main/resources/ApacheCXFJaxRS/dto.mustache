@@ -13,7 +13,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  **/{{/description}}
 @ApiModel(description = "{{{description}}}")
 public class {{classname}} {{#parent}}extends {{{parent}}}{{/parent}} {
-  {{#vars}}{{#isEnum}}
+  {{#vars}}
+  {{#required}}
+  @NotNull{{/required}}{{#isEnum}}
   public enum {{datatypeWithEnum}} {
     {{#allowableValues}}{{#values}} {{.}}, {{/values}}{{/allowableValues}}
   };
