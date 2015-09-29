@@ -5,6 +5,9 @@ package {{package}};
 
 import io.swagger.annotations.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.validation.constraints.NotNull;
+
 {{#models}}
 
 {{#model}}{{#description}}
@@ -14,12 +17,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @ApiModel(description = "{{{description}}}")
 public class {{classname}} {{#parent}}extends {{{parent}}}{{/parent}} {
   {{#vars}}
-  {{#required}}
-  @NotNull{{/required}}{{#isEnum}}
+  {{#isEnum}}
   public enum {{datatypeWithEnum}} {
     {{#allowableValues}}{{#values}} {{.}}, {{/values}}{{/allowableValues}}
   };
+  {{#required}}@NotNull{{/required}}
   private {{{datatypeWithEnum}}} {{name}} = {{{defaultValue}}};{{/isEnum}}{{^isEnum}}
+  {{#required}}@NotNull{{/required}}
   private {{{datatype}}} {{name}} = {{{defaultValue}}};{{/isEnum}}{{/vars}}
 
   {{#vars}}
