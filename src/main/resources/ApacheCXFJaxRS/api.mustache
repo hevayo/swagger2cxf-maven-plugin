@@ -10,7 +10,6 @@ import io.swagger.annotations.ApiParam;
 {{/imports}}
 
 import java.util.List;
-import {{package}}.NotFoundException;
 
 import java.io.InputStream;
 
@@ -38,7 +37,7 @@ public class {{classname}}  {
 
     public Response {{nickname}}({{#allParams}}{{>queryParams}}{{>pathParams}}{{>headerParams}}{{>bodyParams}}{{>formParams}}{{#hasMore}},
     {{/hasMore}}{{/allParams}})
-    throws NotFoundException {
+    {
     return delegate.{{nickname}}({{#allParams}}{{#isFile}}fileDetail{{/isFile}}{{^isFile}}{{paramName}}{{/isFile}}{{#hasMore}},{{/hasMore}}{{/allParams}});
     }
 {{/operation}}
