@@ -20,6 +20,8 @@ import io.swagger.codegen.ClientOptInput;
 import io.swagger.codegen.ClientOpts;
 import io.swagger.codegen.CodegenConfig;
 import io.swagger.codegen.DefaultGenerator;
+import io.swagger.models.Operation;
+import io.swagger.models.Path;
 import io.swagger.models.Swagger;
 import io.swagger.parser.SwaggerParser;
 import org.apache.maven.plugin.AbstractMojo;
@@ -30,7 +32,8 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
 import java.io.File;
-
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Goal which touches a timestamp file.
@@ -59,7 +62,7 @@ public class APIGenMojo extends AbstractMojo {
     public void execute()
             throws MojoExecutionException {
         Swagger swagger = new SwaggerParser().read(inputSpec);
-
+        keepOnlySingleTagPerOperation(swagger);
         CodegenConfig config = new CxfCodeGen();
 
         config.additionalProperties().put("invokerPackage", project.getArtifact().getArtifactId());
@@ -74,6 +77,31 @@ public class APIGenMojo extends AbstractMojo {
         input.setConfig(config);
         new DefaultGenerator().opts(input).generate();
 
+    }
+
+    /** This is a workaround fix to avoid generating duplicated methods when there are 
+     * multiple tags per operation
+     * 
+     * @param swagger
+     */
+    private void keepOnlySingleTagPerOperation(Swagger swagger) {
+        for (Path path : swagger.getPaths().values()) {
+            for (Operation op : path.getOperations()) {
+                List<String> tags = op.getTags();
+                if (tags != null) {
+                    Iterator<String> iterator = tags.iterator();
+                    boolean first = true;
+                    while (iterator.hasNext()) {
+                        if (first) {
+                            first = false;
+                        } else {
+                            iterator.remove();
+                        }
+                        iterator.next();
+                    }
+                }
+            }
+        }
     }
 
 }
