@@ -48,7 +48,8 @@ public class CxfCodeGen extends JaxRSServerCodegen {
                         "Object",
                         "BigDecimal",
                         "List",
-                        "Map")
+                        "Map",
+                        "file")
         );
     }
 
