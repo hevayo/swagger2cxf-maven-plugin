@@ -4,7 +4,7 @@ package {{package}};
 {{/imports}}
 
 import io.swagger.annotations.*;
-import org.codehaus.jackson.annotate.*;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.validation.constraints.NotNull;
 
@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
  * {{description}}
  **/{{/description}}
 
-{{#discriminator}}@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "{{discriminator}}")
+{{#discriminator}}@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "{{discriminator}}")
 @JsonSubTypes({
 {{#vendorExtensions.x-wso2-subtypes}}
     @JsonSubTypes.Type(value = {{package}}.{{.}}DTO.class, name = "{{.}}"),
