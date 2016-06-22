@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
  * {{description}}
  **/{{/description}}
 
-{{#discriminator}}@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "{{discriminator}}")
+{{#discriminator}}@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "{{discriminator}}", visible = true)
 @JsonSubTypes({
 {{#vendorExtensions.x-wso2-subtypes}}
     @JsonSubTypes.Type(value = {{package}}.{{.}}DTO.class, name = "{{.}}"),
