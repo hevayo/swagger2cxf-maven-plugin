@@ -4,7 +4,7 @@ package {{package}};
 {{/imports}}
 
 import io.swagger.annotations.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.validation.constraints.NotNull;
 
@@ -14,6 +14,13 @@ import javax.validation.constraints.NotNull;
 /**
  * {{description}}
  **/{{/description}}
+
+{{#discriminator}}@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "{{discriminator}}", visible = true)
+@JsonSubTypes({
+{{#vendorExtensions.x-wso2-subtypes}}
+    @JsonSubTypes.Type(value = {{package}}.{{.}}DTO.class, name = "{{.}}"),
+{{/vendorExtensions.x-wso2-subtypes}}
+}){{/discriminator}}
 @ApiModel(description = "{{{description}}}")
 public class {{classname}} {{#parent}}extends {{{parent}}}{{/parent}} {
   {{#vars}}
