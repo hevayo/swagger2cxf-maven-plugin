@@ -42,6 +42,11 @@ public class {{classname}}  {
     {
     return delegate.{{nickname}}({{#allParams}}{{#isFile}}{{paramName}}InputStream,{{paramName}}Detail{{/isFile}}{{^isFile}}{{paramName}}{{/isFile}}{{#hasMore}},{{/hasMore}}{{/allParams}});
     }
+
+    public String {{nickname}}GetLastUpdatedTime({{#allParams}}{{>serviceQueryParams}}{{>servicePathParams}}{{>serviceHeaderParams}}{{>serviceBodyParams}}{{>serviceFormParams}}{{#hasMore}},{{/hasMore}}{{/allParams}})
+    {
+        return delegate.{{nickname}}GetLastUpdatedTime({{#allParams}}{{#isFile}}{{paramName}}InputStream,{{paramName}}Detail{{/isFile}}{{^isFile}}{{paramName}}{{/isFile}}{{#hasMore}},{{/hasMore}}{{/allParams}});
+    }
 {{/operation}}
 }
 {{/operations}}
