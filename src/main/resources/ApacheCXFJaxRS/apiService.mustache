@@ -18,6 +18,10 @@ public abstract class {{classname}}Service {
 {{#operation}}
     public abstract Response {{nickname}}({{#allParams}}{{>serviceQueryParams}}{{>servicePathParams}}{{>serviceHeaderParams}}{{>serviceBodyParams}}{{>serviceFormParams}}{{#hasMore}},{{/hasMore}}{{/allParams}});
 {{/operation}}
+
+{{#operation}}
+    public abstract String {{nickname}}GetLastUpdatedTime({{#allParams}}{{>serviceQueryParams}}{{>servicePathParams}}{{>serviceHeaderParams}}{{>serviceBodyParams}}{{>serviceFormParams}}{{#hasMore}},{{/hasMore}}{{/allParams}});
+{{/operation}}
 }
 
 {{/operations}}
