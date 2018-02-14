@@ -14,9 +14,11 @@ import java.util.List;
 import java.io.InputStream;
 import org.apache.cxf.jaxrs.ext.multipart.Attachment;
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
+import org.apache.cxf.jaxrs.ext.MessageContext;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 
 @Path("/{{baseName}}")
 {{#hasConsumes}}@Consumes({ {{#consumes}}"{{mediaType}}"{{#hasMore}}, {{/hasMore}}{{/consumes}} }){{/hasConsumes}}
@@ -38,9 +40,9 @@ public class {{classname}}  {
         {{/hasMore}}{{/responses}} })
 
     public Response {{nickname}}({{#allParams}}{{>queryParams}}{{>pathParams}}{{>headerParams}}{{>bodyParams}}{{>formParams}}{{#hasMore}},
-    {{/hasMore}}{{/allParams}})
+    {{/hasMore}}{{/allParams}}, @Context MessageContext context)
     {
-    return delegate.{{nickname}}({{#allParams}}{{#isFile}}{{paramName}}InputStream,{{paramName}}Detail{{/isFile}}{{^isFile}}{{paramName}}{{/isFile}}{{#hasMore}},{{/hasMore}}{{/allParams}});
+    return delegate.{{nickname}}({{#allParams}}{{#isFile}}{{paramName}}InputStream,{{paramName}}Detail{{/isFile}}{{^isFile}}{{paramName}}{{/isFile}}{{#hasMore}},{{/hasMore}}{{/allParams}},context);
     }
 {{/operation}}
 }
