@@ -15,6 +15,7 @@ import java.io.InputStream;
 import org.apache.cxf.jaxrs.ext.multipart.Attachment;
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
 
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.*;
 
@@ -41,6 +42,11 @@ public class {{classname}}  {
     {{/hasMore}}{{/allParams}})
     {
     return delegate.{{nickname}}({{#allParams}}{{#isFile}}{{paramName}}InputStream,{{paramName}}Detail{{/isFile}}{{^isFile}}{{paramName}}{{/isFile}}{{#hasMore}},{{/hasMore}}{{/allParams}});
+    }
+
+    public String {{nickname}}GetLastUpdatedTime({{#allParams}}{{>serviceQueryParams}}{{>servicePathParams}}{{>serviceHeaderParams}}{{>serviceBodyParams}}{{>serviceFormParams}}{{#hasMore}},{{/hasMore}}{{/allParams}})
+    {
+        return delegate.{{nickname}}GetLastUpdatedTime({{#allParams}}{{#isFile}}{{paramName}}InputStream,{{paramName}}Detail{{/isFile}}{{^isFile}}{{paramName}}{{/isFile}}{{#hasMore}},{{/hasMore}}{{/allParams}});
     }
 {{/operation}}
 }
