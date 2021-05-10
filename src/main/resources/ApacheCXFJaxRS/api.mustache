@@ -14,6 +14,7 @@ import java.util.List;
 import java.io.InputStream;
 import org.apache.cxf.jaxrs.ext.multipart.Attachment;
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
+import org.wso2.carbon.apimgt.api.APIManagementException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.*;
@@ -38,7 +39,7 @@ public class {{classname}}  {
         {{/hasMore}}{{/responses}} })
 
     public Response {{nickname}}({{#allParams}}{{>queryParams}}{{>pathParams}}{{>headerParams}}{{>bodyParams}}{{>formParams}}{{#hasMore}},
-    {{/hasMore}}{{/allParams}})
+    {{/hasMore}}{{/allParams}}) throws APIManagementException
     {
     return delegate.{{nickname}}({{#allParams}}{{#isFile}}{{paramName}}InputStream,{{paramName}}Detail{{/isFile}}{{^isFile}}{{paramName}}{{/isFile}}{{#hasMore}},{{/hasMore}}{{/allParams}});
     }
