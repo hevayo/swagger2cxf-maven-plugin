@@ -80,7 +80,7 @@ public class APIGenMojo extends AbstractMojo {
             config.additionalProperties().put("apiPackage", project.getArtifact().getArtifactId());
         }
         if (modelPackage != null && !modelPackage.isEmpty()) {
-            config.additionalProperties().put("modelPackage", modelPackage + ".dto");
+            config.additionalProperties().put("modelPackage", modelPackage);
         } else {
             config.additionalProperties().put("modelPackage", project.getArtifact().getArtifactId() + ".dto");
         }
