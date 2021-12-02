@@ -60,6 +60,12 @@ public class APIGenMojo extends AbstractMojo {
     @Parameter( defaultValue = "${project}", readonly = true )
     private MavenProject project;
 
+    @Parameter
+    private String apiPackage;
+
+    @Parameter
+    private String modelPackage;
+
 
     public void execute()
             throws MojoExecutionException {
@@ -68,8 +74,16 @@ public class APIGenMojo extends AbstractMojo {
         CodegenConfig config = new CxfCodeGen();
 
         config.additionalProperties().put("invokerPackage", project.getArtifact().getArtifactId());
-        config.additionalProperties().put("apiPackage", project.getArtifact().getArtifactId());
-        config.additionalProperties().put("modelPackage", project.getArtifact().getArtifactId() + ".dto");
+        if (apiPackage != null && !apiPackage.isEmpty()) {
+            config.additionalProperties().put("apiPackage", apiPackage);
+        } else {
+            config.additionalProperties().put("apiPackage", project.getArtifact().getArtifactId());
+        }
+        if (modelPackage != null && !modelPackage.isEmpty()) {
+            config.additionalProperties().put("modelPackage", modelPackage);
+        } else {
+            config.additionalProperties().put("modelPackage", project.getArtifact().getArtifactId() + ".dto");
+        }
 
 
         config.setOutputDir(output.getAbsolutePath());
