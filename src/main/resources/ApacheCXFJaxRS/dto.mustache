@@ -22,6 +22,7 @@ import javax.validation.constraints.NotNull;
 {{/vendorExtensions.x-wso2-subtypes}}
 }){{/discriminator}}
 @ApiModel(description = "{{{description}}}")
+{{#vendorExtensions.x-wso2-json-ignore-unknown}}@JsonIgnoreProperties(ignoreUnknown = true){{/vendorExtensions.x-wso2-json-ignore-unknown}}
 public class {{classname}} {{#parent}}extends {{{parent}}}{{/parent}} {
   {{#vars}}
   {{#isEnum}}
@@ -31,6 +32,7 @@ public class {{classname}} {{#parent}}extends {{{parent}}}{{/parent}} {
   {{#required}}@NotNull{{/required}}
   private {{{datatypeWithEnum}}} {{name}} = {{{defaultValue}}};{{/isEnum}}{{^isEnum}}
   {{#required}}@NotNull{{/required}}
+  {{#vendorExtensions.x-field-extra-annotation}}{{{vendorExtensions.x-field-extra-annotation}}}{{/vendorExtensions.x-field-extra-annotation}}
   private {{{datatype}}} {{name}} = {{{defaultValue}}};{{/isEnum}}{{/vars}}
 
   {{#vars}}
@@ -40,7 +42,7 @@ public class {{classname}} {{#parent}}extends {{{parent}}}{{/parent}} {
    * maximum: {{maximum}}{{/maximum}}
    **/
   @ApiModelProperty({{#required}}required = {{required}}, {{/required}}value = "{{{description}}}")
-  @JsonProperty("{{name}}")
+  @JsonProperty("{{baseName}}")
   public {{{datatypeWithEnum}}} {{getter}}() {
     return {{name}};
   }
